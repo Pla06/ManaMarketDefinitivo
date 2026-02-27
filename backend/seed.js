@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb://localhost:27017'; // Reemplaza con tu cadena de conexión de MongoDB
+const uri = 'mongodb://127.0.0.1:27017'; // Reemplaza con tu cadena de conexión de MongoDB
 const client = new MongoClient(uri);
 
 async function seedDatabase() {
