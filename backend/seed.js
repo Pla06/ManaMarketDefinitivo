@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb+srv://<usuario>:<contraseña>@<nombre-cluster>.mongodb.net/<nombre-base-datos>?retryWrites=true&w=majority'; // Reemplaza con tu URI de conexión de MongoDB Atlas
+const uri = 'mongodb+srv://Mario:<marioyhector>@cluster0.mongodb.net/sample_mflix?retryWrites=true&w=majority'; // Reemplaza <contraseña> con la contraseña de tu usuario de MongoDB Atlas
 const client = new MongoClient(uri);
 
 async function seedDatabase() {
