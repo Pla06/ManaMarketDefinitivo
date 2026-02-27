@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
     RouterLink
   ],
   templateUrl: './card-edit.component.html',
-  styleUrl: './card-edit.component.css'
+  styleUrls: ['./card-edit.component.css']
 })
 export class CardEditComponent implements OnInit{
   @Input("id") id!:string;
