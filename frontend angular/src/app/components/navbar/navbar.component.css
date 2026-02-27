@@ -1,0 +1,18 @@
+.d-flex.flex-column {
+  min-height: 100vh;
+  background-color: var(--mtg-bg-darker);
+  border-right: 3px solid transparent;
+  border-image: linear-gradient(
+    180deg,
+    var(--mtg-white),
+    var(--mtg-blue),
+    var(--mtg-black),
+    var(--mtg-red),
+    var(--mtg-green)
+  ) 1;
+}
+
+.nav-link.active {
+  background: linear-gradient(90deg, var(--mtg-red), var(--mtg-green));
+  color: white !important;
+}

@@ -1,0 +1,48 @@
+.app-wrapper {
+  background-color: var(--mtg-bg-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+.top-navbar {
+  background-color: var(--mtg-bg-darker);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.brand-link {
+  color: #ffffff !important;
+}
+
+.brand-link:hover {
+  opacity: 0.85;
+  color: #ffffff !important;
+}
+
+.nav-link-top {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-weight: 500;
+  color: #ffffff !important;
+}
+
+.nav-link-top:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff !important;
+}
+
+.nav-link-top.active-top {
+  background: linear-gradient(90deg, var(--mtg-blue), var(--mtg-green));
+  color: white !important;
+  font-weight: 600;
+}

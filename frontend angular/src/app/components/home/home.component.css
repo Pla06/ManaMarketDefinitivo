@@ -1,0 +1,248 @@
+.home-container {
+  background-color: var(--mtg-bg-dark);
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, rgba(14, 104, 171, 0.2), rgba(0, 115, 62, 0.2));
+  border-radius: 1.5rem;
+  padding: 3rem 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-section h1 {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.hero-section h1 svg {
+  fill: var(--mtg-blue);
+}
+
+.text-light-emphasis {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Stats Card */
+.stats-card {
+  background: linear-gradient(135deg, var(--mtg-bg-darker), var(--mtg-black));
+  border: 2px solid var(--mtg-blue);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--mtg-blue);
+  line-height: 1;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+}
+
+.stat-divider {
+  width: 2px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Section Cards */
+.section-card {
+  background-color: var(--mtg-bg-darker);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  height: 100%;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-header h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.section-header h3 svg {
+  fill: var(--mtg-blue);
+}
+
+.view-all-link {
+  color: var(--mtg-blue);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.view-all-link:hover {
+  color: var(--mtg-white);
+  transform: translateX(5px);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.empty-state svg {
+  fill: rgba(255, 255, 255, 0.3);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* Preview List */
+.preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.preview-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.preview-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--mtg-blue);
+  transform: translateX(5px);
+}
+
+.preview-image {
+  width: 60px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  border: 2px solid var(--mtg-blue);
+}
+
+.preview-info {
+  flex: 1;
+}
+
+.preview-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.preview-quantity,
+.preview-collection {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+}
+
+.more-items {
+  text-align: center;
+  padding: 1rem;
+  color: var(--mtg-blue);
+  font-weight: 600;
+  background-color: rgba(14, 104, 171, 0.1);
+  border-radius: 0.5rem;
+}
+
+/* Card Preview */
+.card-preview-link {
+  text-decoration: none;
+  display: block;
+}
+
+.card-preview {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.card-preview:hover {
+  transform: translateY(-8px);
+}
+
+.card-preview-image {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.card-preview:hover .card-preview-image {
+  border-color: var(--mtg-blue);
+  box-shadow: 0 8px 24px rgba(14, 104, 171, 0.4);
+}
+
+.card-preview-name {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .stats-card {
+    padding: 1.5rem;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .section-card {
+    padding: 1.5rem;
+  }
+}

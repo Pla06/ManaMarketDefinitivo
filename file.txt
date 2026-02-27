@@ -1,0 +1,11 @@
+npm init --yes
+
+npm i express mongoose cors morgan
+
+npm i -D nodemon
+ // instala la carpeta node modules y el package-lock.json
+ // para que funcione el nodemon que es la paqueteria
+ // de node en modo desarrollo
+
+ npm run dev
+ // ejecutar el proyecto de node en modo desarrollo

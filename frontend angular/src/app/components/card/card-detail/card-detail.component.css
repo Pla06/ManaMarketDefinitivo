@@ -1,0 +1,41 @@
+.detail-container {
+  background-color: var(--mtg-bg-darker);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.detail-image {
+  width: 100%;
+  border-radius: 0.75rem;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+  border: 3px solid var(--mtg-blue);
+}
+
+.rarity-badge {
+  background: linear-gradient(135deg, var(--mtg-red), var(--mtg-green));
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+}

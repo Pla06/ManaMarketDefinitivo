@@ -1,0 +1,108 @@
+<div class="cart-container">
+  <div class="container-fluid">
+    <!-- Header -->
+    <div class="cart-header">
+      <h2 class="cart-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cart3 me-2" viewBox="0 0 16 16">
+          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+        </svg>
+        Mi Carrito
+      </h2>
+      <button class="btn btn-outline-danger" type="button" (click)="clear()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash me-1" viewBox="0 0 16 16">
+          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+          <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+        </svg>
+        Vaciar
+      </button>
+    </div>
+
+    @if ((items$ | async)?.length === 0) {
+      <!-- Empty Cart State -->
+      <div class="empty-cart-message">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-cart-x mb-3" viewBox="0 0 16 16">
+          <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793z"/>
+          <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+        </svg>
+        <h4>Tu carrito está vacío</h4>
+        <p>Añade cartas desde el catálogo para empezar tu colección</p>
+        <button class="btn btn-primary btn-lg mt-2" routerLink="/card/list">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left me-2" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg>
+          Ver catálogo
+        </button>
+      </div>
+    } @else {
+      <!-- Cart Items -->
+      <div class="cart-items">
+        @for (item of items$ | async; track item.card._id) {
+          <div class="cart-item-card">
+            <div class="item-image">
+              <img [src]="item.card.imageUrl" [alt]="item.card.name">
+            </div>
+            
+            <div class="item-details">
+              <h5 class="item-name">{{ item.card.name }}</h5>
+              <div class="item-info">
+                <span class="badge bg-secondary">{{ item.card.collection }}</span>
+                <span class="badge bg-info">{{ item.card.rarity }}</span>
+              </div>
+              <div class="item-price-unit">{{ item.card.price | currency:'EUR' }} / unidad</div>
+            </div>
+
+            <div class="item-actions">
+              <div class="quantity-section">
+                <label class="quantity-label">Cantidad</label>
+                <input class="quantity-input" type="number" min="1" max="99"
+                       [value]="item.quantity" 
+                       (change)="updateQuantity(item.card._id, $any($event.target).value)">
+              </div>
+
+              <div class="subtotal-section">
+                <span class="subtotal-label">Subtotal</span>
+                <span class="subtotal-value">{{ (item.card.price * item.quantity) | currency:'EUR' }}</span>
+              </div>
+
+              <button class="btn btn-outline-danger btn-sm remove-btn" type="button" (click)="remove(item.card._id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                </svg>
+                Quitar
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Checkout Section -->
+      <div class="checkout-section">
+        <button class="btn btn-outline-secondary btn-lg" routerLink="/card/list">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left me-2" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg>
+          Seguir comprando
+        </button>
+
+        <div class="checkout-box">
+          <div class="total-section">
+            <span class="total-label">Total a pagar</span>
+            <span class="total-value">{{ total$ | async | currency:'EUR' }}</span>
+          </div>
+          <button class="btn btn-success btn-lg checkout-btn" type="button" (click)="checkout()" [disabled]="isProcessing">
+            @if (isProcessing) {
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Procesando...
+            } @else {
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle me-2" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+              </svg>
+              Proceder al pago
+            }
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

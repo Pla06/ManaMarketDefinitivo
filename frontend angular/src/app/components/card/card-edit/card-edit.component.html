@@ -1,0 +1,101 @@
+﻿<div class="container-fluid edit-container">
+  <style>
+    /* apply same slightly lighter dark shade as file; remove rigid pure black override */
+    .card-custom { background:#111111!important; color:#fff!important; }
+    .card-custom * { color:#fff!important; }
+  </style>
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8 my-4">
+      <div class="card card-custom">
+        <div class="card-header text-center bg-mtg-blue text-white">
+          <h2 class="mb-0">{{ editar ? 'Editar carta' : 'Nueva carta' }}</h2>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="formCard" (ngSubmit)="addCard()" class="card-form">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Nombre de la carta</label>
+                  <input type="text" formControlName="name" class="form-control" id="name" placeholder="Nombre">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="collection" class="form-label">Colección</label>
+                  <select class="form-select" id="collection" formControlName="collection">
+                    <option value="" disabled>Selecciona una colección</option>
+                    <option *ngFor="let collection of collectionList" [value]="collection">{{ collection }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="rarity" class="form-label">Rareza</label>
+                  <input type="text" formControlName="rarity" class="form-control" id="rarity" placeholder="Rareza">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="type" class="form-label">Tipo de carta</label>
+                  <input type="text" formControlName="type" class="form-control" id="type" placeholder="Tipo">
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="input-group mb-3" [formGroup]="myNewCollection">
+                  <input type="text" formControlName="newCollection" class="form-control" placeholder="Nueva colección" id="newCollection">
+                  <button class="btn btn-outline-primary" type="button" (click)="addNewCollection()">Agregar</button>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="price" class="form-label">Precio (€)</label>
+                  <input type="number" formControlName="price" class="form-control" id="price" placeholder="0.00" min="0" step="0.01">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="stock" class="form-label">Stock disponible</label>
+                  <input type="number" formControlName="stock" class="form-control" id="stock" placeholder="0" min="0" step="1">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="language" class="form-label">Idioma</label>
+                  <input type="text" formControlName="language" class="form-control" id="language" placeholder="Idioma">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="condition" class="form-label">Estado</label>
+                  <input type="text" formControlName="condition" class="form-control" id="condition" placeholder="Estado">
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="mb-3">
+                  <label for="imageUrl" class="form-label">URL de la imagen</label>
+                  <input type="text" formControlName="imageUrl" class="form-control" id="imageUrl" placeholder="https://">
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4" routerLink="/card/list">Cancelar</button>
+                <button *ngIf="editar" type="button" class="btn btn-danger btn-lg px-4" (click)="deleteCard()" [disabled]="isSubmitting">Eliminar</button>
+              </div>
+              <button type="submit" class="btn btn-success btn-lg px-5" [disabled]="isSubmitting">
+                {{editar? 'Actualizar' : 'Crear carta'}}
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
