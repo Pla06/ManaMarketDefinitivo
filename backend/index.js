@@ -12,8 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 //Routes
-app.use('/api/v1/movies', require('./routes/movie.route'));
-app.use('/', (req, res) => res.send('API is in /api/v1/movies/'));
+app.use('/api/v1/cartas', require('./routes/cartas.routes'));
+app.use('/', (req, res) => res.send('API is in /api/v1/cartas/'));
 
 //Settings
 app.set('port', process.env.PORT || 3000);
