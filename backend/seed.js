@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb+srv://Mario:<marioyhector>@cluster0.mongodb.net/sample_mflix?retryWrites=true&w=majority'; // Reemplaza <contraseña> con la contraseña de tu usuario de MongoDB Atlas
+const uri = 'mongodb+srv://Mario:marioYHector@cluster0.uqj3rpc.mongodb.net/ManaMarket?appName=Cluster0'; 
 const client = new MongoClient(uri);
 
 async function seedDatabase() {
