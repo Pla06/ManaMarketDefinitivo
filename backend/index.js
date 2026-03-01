@@ -2,11 +2,35 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 const app = express();
 const { json } = require('express');
 
-// Conectar siempre a la base de datos usando database.js (mismo comportamiento en local y en Vercel)
-const db = require('./database');
+// Conexión a la base de datos
+let db;
+
+// Consideramos entorno serverless (Vercel) cuando existe la variable VERCEL
+const isServerless = !!process.env.VERCEL;
+
+if (isServerless) {
+    // En Vercel usamos la URI de entorno; si no está, usamos la que tienes en database.js
+    const uri = process.env.MONGODB_URI || 'mongodb+srv://hecmardom_db_user:MarioYHector@manamarket.3lsst8d.mongodb.net/ManaMarket?appName=ManaMarket';
+
+    if (mongoose.connection.readyState === 0) {
+        mongoose
+            .connect(uri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            })
+            .then(() => console.log('DB is connected (Vercel runtime)'))
+            .catch(err => console.error('DB connection error (Vercel runtime):', err));
+    }
+
+    db = mongoose;
+} else {
+    // En local seguimos usando tu archivo database.js sin modificarlo
+    db = require('./database');
+}
 
 //Middlewares
 app.use(morgan('dev'));
@@ -27,7 +51,7 @@ app.set('port', process.env.PORT || 3000);
 module.exports = app;
 
 // En entorno local levantamos el servidor escuchando en un puerto
-if (!process.env.VERCEL) {
+if (!isServerless) {
     // iniciar el server solo cuando la base de datos esté lista
     if (db.connection.readyState === 1) {
         app.listen(app.get('port'), () => {
