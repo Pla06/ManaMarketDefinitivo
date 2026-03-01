@@ -26,7 +26,8 @@ cartaCtrl.getCarta = async (req, res) => {
 cartaCtrl.addCarta = async (req, res) => {
     // Ahora el endpoint espera los campos en inglés en el body
     // name, year, expansion, price, rarity, text, imageUrl
-    const { name, year, expansion, price, rarity, text, imageUrl } = req.body;
+    // Usamos un objeto vacío por defecto para evitar errores si req.body es undefined
+    const { name, year, expansion, price, rarity, text, imageUrl } = req.body || {};
 
     // validar campos obligatorios
     if (!name || !year || !expansion || !price || !rarity || !text || !imageUrl) {
@@ -63,7 +64,8 @@ cartaCtrl.addCarta = async (req, res) => {
 // Actualizar una carta
 cartaCtrl.updateCarta = async (req, res) => {
     // El frontend envía los campos en inglés, igual que en addCarta
-    const { name, year, expansion, price, rarity, text, imageUrl } = req.body;
+    // Usamos un objeto vacío por defecto para evitar errores si req.body es undefined
+    const { name, year, expansion, price, rarity, text, imageUrl } = req.body || {};
 
     // Construir el objeto de actualización mapeando a los nombres del esquema
     const update = {};
