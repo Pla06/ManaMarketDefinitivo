@@ -2,17 +2,32 @@ const mongoose = require('mongoose');
 const {Schema} = require("mongoose");
 
 const cartasSchema = new Schema({
-        nombre: {type: String, required: true},
-        year: {type: Number, required: true},
-        expansion: {type: String, required: true},
-        precio: {type: Number, required: true},
-        rareza: {type: String, required: true},
-        texto: {type: String, required: true},
-        imagen: {type: String, required: true}
+        // Campos en inglés utilizados por los frontends
+        name: { type: String },
+        collection: { type: String },
+        rarity: { type: String },
+        type: { type: String },
+        price: { type: Number },
+        stock: { type: Number },
+        language: { type: String },
+        condition: { type: String },
+        imageUrl: { type: String },
+
+        // Campos legacy en español (compatibilidad hacia atrás)
+        nombre: {type: String},
+        year: {type: Number},
+        expansion: {type: String},
+        precio: {type: Number},
+        rareza: {type: String},
+        texto: {type: String},
+        imagen: {type: String}
     },
 
-    {versionKey: false,
-         timestamps: true
+    {
+        versionKey: false,
+        timestamps: true,
+        // Permitimos campos adicionales por si hay documentos antiguos con otras propiedades
+        strict: false,
     }
     );
 
