@@ -151,6 +151,11 @@ cartaCtrl.updateCarta = async (req, res) => {
         update.texto = text;
     }
 
+    // Si no hay ningún campo válido para actualizar, devolvemos un error claro
+    if (Object.keys(update).length === 0) {
+        return res.status(400).json({ status: 'No hay campos válidos para actualizar' });
+    }
+
     try {
         const data = await Carta.findByIdAndUpdate(
             req.params.id,
