@@ -24,8 +24,11 @@ app.set('port', process.env.PORT || 3000);
 // Conexión a la base de datos
 let db;
 
-if (process.env.VERCEL) {
-    // En Vercel usamos la cadena de conexión desde la variable de entorno
+// Consideramos "entorno serverless" si estamos en Vercel o si existe MONGODB_URI
+const isServerless = !!(process.env.VERCEL || process.env.MONGODB_URI);
+
+if (isServerless) {
+    // En Vercel/entorno serverless usamos siempre la cadena de conexión desde la variable de entorno
     const uri = process.env.MONGODB_URI || 'mongodb+srv://hecmardom_db_user:MarioYHector@manamarket.3lsst8d.mongodb.net/ManaMarket?appName=ManaMarket';
 
     // Solo conectamos si aún no hay conexión abierta
@@ -35,8 +38,8 @@ if (process.env.VERCEL) {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             })
-            .then(() => console.log('DB is connected (Vercel runtime)'))
-            .catch(err => console.error('DB connection error (Vercel runtime):', err));
+            .then(() => console.log('DB is connected (serverless runtime)'))
+            .catch(err => console.error('DB connection error (serverless runtime):', err));
     }
 
     db = mongoose;
@@ -48,8 +51,8 @@ if (process.env.VERCEL) {
 // Exportar la app para que Vercel la use como serverless function
 module.exports = app;
 
-// En entorno local (no Vercel) levantamos el servidor escuchando en un puerto
-if (!process.env.VERCEL) {
+// En entorno local (no serverless) levantamos el servidor escuchando en un puerto
+if (!isServerless) {
     // iniciar el server solo cuando la base de datos esté lista
     if (db.connection.readyState === 1) {
         app.listen(app.get('port'), () => {
