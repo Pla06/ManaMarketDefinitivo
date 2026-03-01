@@ -20,8 +20,8 @@ export class ServiceCardService {
     if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
       return 'http://localhost:3000/api/v1/cards/';
     }
-    // Cambiar esto por tu URL del backend en Vercel
-    return '/api/v1/cards/';
+    // Producción: dominio del backend en Vercel
+    return 'https://mana-market-backend-c9k2f6khn-hnector-martinezs-projects.vercel.app/api/v1/cards/';
   }
 
   constructor() { }

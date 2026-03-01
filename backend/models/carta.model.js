@@ -16,4 +16,5 @@ const cartasSchema = new Schema({
     }
     );
 
-module.exports = mongoose.model('Cartas', cartasSchema, 'cartas2026');
+// Usar la colección existente 'cartas' en la base de datos
+module.exports = mongoose.model('Cartas', cartasSchema, 'cartas');
