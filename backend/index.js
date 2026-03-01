@@ -21,22 +21,28 @@ app.use('/', (req, res) => res.send('API is in /api/v1/cartas/ or /api/v1/cards/
 //Settings
 app.set('port', process.env.PORT || 3000);
 
-// iniciar el server solo cuando la base de datos esté lista
+// Conexión a la base de datos (side effect al hacer require)
 const db = require('./database');
 
-// si ya está conectado, iniciar inmediatamente
-if (db.connection.readyState === 1) {
-    app.listen(app.get('port'), () => {
-        console.log('Server on port', app.get('port'));
-    });
-} else {
-    db.connection.once('open', () => {
-        console.log('Database connection opened, starting server');
+// Exportar la app para que Vercel la use como serverless function
+module.exports = app;
+
+// En entorno local (no Vercel) levantamos el servidor escuchando en un puerto
+if (!process.env.VERCEL) {
+    // iniciar el server solo cuando la base de datos esté lista
+    if (db.connection.readyState === 1) {
         app.listen(app.get('port'), () => {
             console.log('Server on port', app.get('port'));
         });
-    });
-    db.connection.on('error', err => {
-        console.error('Database error before starting server:', err);
-    });
+    } else {
+        db.connection.once('open', () => {
+            console.log('Database connection opened, starting server');
+            app.listen(app.get('port'), () => {
+                console.log('Server on port', app.get('port'));
+            });
+        });
+        db.connection.on('error', err => {
+            console.error('Database error before starting server:', err);
+        });
+    }
 }
