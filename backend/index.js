@@ -28,14 +28,16 @@ if (process.env.VERCEL) {
     // En Vercel usamos la cadena de conexión desde la variable de entorno
     const uri = process.env.MONGODB_URI || 'mongodb+srv://hecmardom_db_user:MarioYHector@manamarket.3lsst8d.mongodb.net/ManaMarket?appName=ManaMarket';
 
-    mongoose.set('bufferCommands', false);
-
-    mongoose.connect(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-        .then(() => console.log('DB is connected (Vercel runtime)'))
-        .catch(err => console.error('DB connection error (Vercel runtime):', err));
+    // Solo conectamos si aún no hay conexión abierta
+    if (mongoose.connection.readyState === 0) {
+        mongoose
+            .connect(uri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            })
+            .then(() => console.log('DB is connected (Vercel runtime)'))
+            .catch(err => console.error('DB connection error (Vercel runtime):', err));
+    }
 
     db = mongoose;
 } else {
