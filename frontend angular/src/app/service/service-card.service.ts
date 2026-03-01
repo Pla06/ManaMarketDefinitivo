@@ -21,7 +21,7 @@ export class ServiceCardService {
       return 'http://localhost:3000/api/v1/cards/';
     }
     // Producción: dominio del backend en Vercel
-    return 'https://mana-market-backend-c9k2f6khn-hnector-martinezs-projects.vercel.app/api/v1/cards/';
+    return 'https://mana-market-backend-dbqb3eh8z-hnector-martinezs-projects.vercel.app/api/v1/cards/';
   }
 
   constructor() { }
