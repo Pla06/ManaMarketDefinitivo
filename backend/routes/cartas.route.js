@@ -1,11 +1,11 @@
 const express = require('express');
-const  movieCtrl = require('../controllers/carta.controller');
+const cartaCtrl = require('../controllers/carta.controller');
 const router = express.Router();
 
-router.get('/', movieCtrl.getMovies);
-router.get('/carta/:id', movieCtrl.getMovie);
-router.post('/publicar', movieCtrl.addMovie);
-router.put('/editar/:id', movieCtrl.updateMovie);
-router.delete('/eliminar/:id', movieCtrl.deleteMovie);
+router.get('/', cartaCtrl.getCartas);
+router.get('/carta/:id', cartaCtrl.getCarta);
+router.post('/publicar', cartaCtrl.addCarta);
+router.put('/editar/:id', cartaCtrl.updateCarta);
+router.delete('/eliminar/:id', cartaCtrl.deleteCarta);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const Carta = require('../models/carta.model');
+const mongoose = require('mongoose');
 const cartaCtrl = {};
 
 //Funciones CRUD
@@ -23,10 +24,27 @@ cartaCtrl.getCarta = async (req, res) => {
 
 // Agregar una carta nueva
 cartaCtrl.addCarta = async (req, res) => {
-    const carta = new Carta(req.body);
-    await carta.save()
-        .then((data)=> res.status(201).json({status:'Carta Successully Inserted'}))
-        .catch((err)=>res.status(400).json({status:err}));
+    // validar campos obligatorios
+    let { nombre, year, expansion, precio, rareza, texto, imagen } = req.body;
+    if (!nombre || !year || !expansion || !precio || !rareza || !texto || !imagen) {
+        return res.status(400).json({status: 'Faltan campos'});
+    }
+
+    try {
+        // verificar duplicado por nombre
+        const existente = await Carta.findOne({ nombre: nombre });
+        if (existente) {
+            return res.status(400).json({status: 'Carta ya existe'});
+        }
+
+        const carta = new Carta(req.body);
+        const data = await carta.save();
+        return res.status(200).json({status: 'Se ha añadido la carta correctamente', data});
+    } catch (err) {
+        // devolver mensaje legible y usar código 500 para problemas del servidor/BD
+        const message = err && err.message ? err.message : JSON.stringify(err);
+        return res.status(500).json({status: message || 'Error desconocido'});
+    }
 };
 
 // Actualizar una carta
