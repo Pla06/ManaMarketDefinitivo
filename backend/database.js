@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // optional: disable buffering so queries fail fast if not connected
 mongoose.set('bufferCommands', false);
 
-const URI = 'mongodb+srv://hecmardom_db_user:MarioYHector@manamarket.3lsst8d.mongodb.net/ManaMarket?appName=ManaMarket';
+const MONGODB_URI = 'mongodb+srv://hecmardom_db_user:MarioYHector@manamarket.3lsst8d.mongodb.net/ManaMarket?appName=ManaMarket';
 // mongodb+srv://MarioXD:MarioYHector@cluster0.uqj3rpc.mongodb.net/MagicMarket?appName=Cluster0
 
 // Add recommended options for modern drivers
