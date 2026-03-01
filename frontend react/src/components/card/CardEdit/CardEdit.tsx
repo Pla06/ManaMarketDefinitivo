@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Card } from '../../../common/interfaces';
 import { cardService } from '../../../services/cardService';
 import Swal from 'sweetalert2';
 import './CardEdit.css';
