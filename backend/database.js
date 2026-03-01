@@ -1,7 +1,20 @@
 const mongoose = require('mongoose');
+
+// optional: disable buffering so queries fail fast if not connected
+mongoose.set('bufferCommands', false);
+
 const URI = 'mongodb+srv://MarioXD:MarioYHector@cluster0.uqj3rpc.mongodb.net/MagicMarket?appName=Cluster0';
-mongoose.connect(URI)
-    .then(db => console.log('DB is connected'))
-    .catch(err => console.error(err));
+
+// Add recommended options for modern drivers
+mongoose.connect(URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    // other options if needed
+})
+    .then(() => console.log('DB is connected'))
+    .catch(err => console.error('DB connection error:', err));
+
+mongoose.connection.on('connected', () => console.log('Mongoose connected to DB'));
+mongoose.connection.on('error', err => console.error('Mongoose connection error:', err));
 
 module.exports = mongoose;
